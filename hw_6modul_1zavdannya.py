@@ -49,11 +49,6 @@ class Record:
                 p.value = new_phone
                 return
         raise ValueError
-    
-    def edit_phone_alternative(self, old_phone, new_phone):
-        '''This method checks if the phone exists'''
-        self.remove_phone(old_phone)
-        self.add_phone(new_phone)
 
     def find_phone(self, phone): 
         for p in self.phones:
@@ -68,44 +63,10 @@ class Record:
         return f'Record(Name: {self.name} Phones: {self.phones})'
     
 
-class RecordAlternative:
-    def __init__(self, name): 
-        self.name = Name(name)
-        self.phones = list()
-
-    def add_phone(self, phone): 
-        if self.find_phone(phone):
-            return
-        self.phones.append(Phone(phone))
-
-    def remove_phone(self, phone):  
-        phone = self.find_phone(phone)
-        if phone:
-            self.phones.remove(phone)
-            return
-        raise ValueError
-    
-    def edit_phone(self, old_phone, new_phone):
-        phone = self.find_phone(old_phone)
-        if phone:
-            phone.value = new_phone
-            return
-        raise ValueError
-
-    def find_phone(self, phone): 
-        for p in self.phones:
-            if p.value == phone:
-                return p
-
-
 class AddressBook(UserDict): 
     def add_record(self, record: Record): 
         name = record.name.value
         self.data.update({name: record}) 
-
-    def add_record_alternative(self, record: Record): 
-        name = record.name.value
-        self.update({name: record}) 
 
     def find(self, name):
         return self.get(name) 
