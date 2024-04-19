@@ -226,8 +226,8 @@ def birthdays(args, book):
             return "No upcoming birthdays."
         else:
             result = "Upcoming birthdays:\n"
-            for record in upcoming_birthdays:
-                result += f"{record.name}: {record.birthday.date.strftime('%d.%m.%Y')}\n"
+            for name, birthday_date in upcoming_birthdays:
+                result += f"{name}: {birthday_date.strftime('%d.%m.%Y')}\n"
             return result
     except (AttributeError, KeyError):
         return "No upcoming birthdays."
@@ -249,7 +249,7 @@ def main():
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
-        command, *args = parse_input(user_input)
+        command, args = parse_input(user_input)
 
         if command in ["close", "exit"]:
             print("Good bye!")
